@@ -8,16 +8,13 @@ import { useRef } from 'react';
 import ModalAjouterPlayer from './ModalAjouterPlayer';
 
 const InputWithLabel = ({
-    players,
-    currentItem,
-    setCurrentItem,
-    setPlayers,
+   
     id,
     value,
     type = "text",
     onInputChange,
     children
-}) => {
+}:any) => {
 
     //Chakra Modal Settings : Add Player Modal
     const { isOpen: isOpenModal2, onOpen: onOpenModal2, onClose: onCloseModal2 } = useDisclosure();
@@ -28,7 +25,7 @@ const InputWithLabel = ({
             &nbsp;
             <div className="form-group d-flex " >
                 {/* Search Button */}
-                <input className="form-control" id={id} type={type} value={value} onChange={onInputChange} />
+                <input data-testid="search" className="form-control" id={id} type={type} value={value} onChange={onInputChange} />
                 {/* Add Player Button */}
                 <Button
                     type="button"
@@ -46,10 +43,10 @@ const InputWithLabel = ({
 
             {/* Modal Add player */}
             <ModalAjouterPlayer
-                players={players}
-                setCurrentItem={setCurrentItem}
-                setPlayers={setPlayers}
-                currentItem={currentItem}
+             
+              
+            
+              
                 initialRef={initialRef}
                 isOpenModal2={isOpenModal2}
                 onOpenModal2={onOpenModal2}

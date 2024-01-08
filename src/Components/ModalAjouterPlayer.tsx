@@ -1,4 +1,4 @@
-import { Input, Flex, Button } from '@chakra-ui/react';
+import { Input, Button } from '@chakra-ui/react';
 
 import {
     Modal,
@@ -15,22 +15,27 @@ import {
 
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from '@chakra-ui/react'
+import { useDispatch } from 'react-redux';
+import { addPlayer } from '../Store/actions';
+import { useState } from 'react';
 
 
-const ModalAjouterPlayer = ({ players, setCurrentItem, setPlayers, currentItem, initialRef, isOpenModal2, onOpenModal2, onCloseModal2 }) => {
+const ModalAjouterPlayer = ({   initialRef, isOpenModal2,  onCloseModal2 }:any) => {
     //chakra Toast
     const toast = useToast()
-
-
+    const [currentItem,setCurrentItem] = useState<any>()
+    //redux 
+    const dispatch = useDispatch()
     //Add Player Function
-    const handleAddPlayer = (e) => {
+    const handleAddPlayer = (e:any) => {
         e.preventDefault();
         //Generate Unique Id
         const uniqueId = uuidv4();
         //Default Avatar
         currentItem.avatar = "https://www.chess.com/bundles/web/images/noavatar_l.84a92436.gif";
         currentItem.player_id = uniqueId;
-        setPlayers([currentItem, ...players]);
+       
+        dispatch(addPlayer(currentItem))
         onCloseModal2();
         toast({
             title: 'Player Added',
